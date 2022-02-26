@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { LibrosService } from "../services/libros.service";
 
 @Component({
     selector: 'app-libros',
@@ -6,15 +7,20 @@ import { Component } from "@angular/core";
 })
 
 export class LibrosComponent {
-    libros: string[] = ['Título de libro 1', 'Título de libro 2', 'Título de libro 3'];
+
+    libros: string[] = [];
+
+    constructor(private librosService: LibrosService) {
+        this.libros = librosService.obtenerLibros();
+    }
 
     eliminarLibro(libro: string) {
-        this.libros = this.libros.filter(p => p !== libro);
+        
     }
 
     guardarLibro(f) {
         if (f.valid) {
-            this.libros.push(f.value.nombreLibro);
+            
         }
     }
 }
